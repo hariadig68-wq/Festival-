@@ -3,212 +3,1834 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pembelian Tiket Event</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-    background:#0f0f0f;
-    color:white;
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
 }
 
-/* HEADER IMAGE */
-.banner img{
-    width:100%;
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
 }
 
-/* TITLE */
 .title{
-    text-align:center;
-    font-size:28px;
-    font-weight:800;
-    color:#ffd400;
-    margin:20px 0;
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
 }
 
-/* BOX */
-.box{
-    border:2px solid #ffd400;
-    border-radius:20px;
-    margin:20px;
-    padding:20px;
-}
-
-/* TICKET CARD */
-.ticket{
-    background:#111;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:15px;
-}
-
-.ticket h3{
-    font-size:22px;
-}
-
-.price{
-    color:#00ff99;
-    font-size:20px;
-    margin-top:5px;
-}
-
-/* INPUT */
-input,select{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
-    border:none;
-    background:#2a2a2a;
-    color:white;
-}
-
-/* TOTAL */
-.total{
-    border:2px dashed #ffd400;
-    padding:20px;
-    margin-top:15px;
-    text-align:center;
-    border-radius:15px;
-}
-
-.total h2{
-    color:#00ff99;
-}
-
-/* QR */
-.qr-box{
-    border:3px solid #ffd400;
-    border-radius:20px;
-    padding:10px;
-    margin-top:15px;
-    text-align:center;
-}
-
-.qr-box img{
-    width:100%;
-    border-radius:15px;
-}
-
-/* BUTTON */
-.btn{
-    width:90%;
-    margin:30px auto;
-    display:block;
-    padding:15px;
-    background:#ffd400;
-    color:black;
-    font-size:18px;
-    font-weight:bold;
-    border:none;
-    border-radius:15px;
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
 }
 
 label{
-    display:block;
-    margin-top:15px;
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BANNER -->
-<div class="banner">
-    <img src="https://via.placeholder.com/800x300?text=POSTER+EVENT" alt="">
-</div>
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
 
-<div class="title">PEMBELIAN TIKET EVENT</div>
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
 
-<!-- DAFTAR TIKET -->
-<div class="box">
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
 
-<h2>DAFTAR TIKET</h2>
+<label>EMAIL :</label>
+<input type="email" id="email">
 
-<div class="ticket">
-    <h3>PREMIUM</h3>
-    <div class="price">Rp. 450.000</div>
-</div>
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
 
-<div class="ticket">
-    <h3>FESTIVAL</h3>
-    <div class="price">Rp. 300.000</div>
-</div>
+<label>Alamat :</label>
+<input type="text" id="alamat">
 
-<div class="ticket">
-    <h3>FAST TRACK</h3>
-    <div class="price">Rp. 625.000</div>
-</div>
-
-<p style="margin-top:10px;color:#ccc;">Maksimal pembelian tiket: <b>10 tiket</b></p>
-
-</div>
-
-<!-- FORM -->
-<div class="box">
-
-<label>Nama Lengkap</label>
-<input type="text" id="nama" placeholder="Masukan nama lengkap">
-
-<label>E-mail</label>
-<input type="email" id="email" placeholder="Masukan e-mail aktif">
-
-<label>Pilih Tiket</label>
-<select id="tiket" onchange="hitung()">
-<option value="">Pilih tiket</option>
-<option value="450000">PREMIUM - Rp. 450.000</option>
-<option value="300000">FESTIVAL - Rp. 300.000</option>
-<option value="625000">FAST TRACK - Rp. 625.000</option>
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
 </select>
 
-<label>Jumlah Tiket</label>
-<input type="number" id="jumlah" value="1" max="10" onchange="hitung()">
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
 
-<div class="total">
-    <p>TOTAL PEMBAYARAN</p>
-    <h2 id="total">Rp. 0</h2>
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
 </div>
 
-<h2 style="text-align:center;margin-top:20px;color:#ffd400;">SCAN QRIS PEMBAYARAN</h2>
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
 
-<div class="qr-box">
-    <!-- GANTI QRIS KAMU -->
-    <img src="https://via.placeholder.com/400x500?text=QRIS+ANDA">
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
 </div>
-
-<label>Upload Bukti Pembayaran</label>
-<input type="file">
-
-</div>
-
-<button class="btn" onclick="beli()">BELI SEKARANG</button>
 
 <script>
-function hitung(){
-    let harga = document.getElementById("tiket").value;
-    let jumlah = document.getElementById("jumlah").value;
 
-    let total = harga * jumlah;
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
 
-    document.getElementById("total").innerText =
-        "Rp. " + total.toLocaleString("id-ID");
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
 }
 
-function beli(){
-    let nama = document.getElementById("nama").value;
-    let email = document.getElementById("email").value;
-    let tiket = document.getElementById("tiket").value;
-
-    if(!nama || !email || !tiket){
-        alert("Lengkapi data dulu!");
-        return;
-    }
-
-    alert("Pesanan berhasil! Kirim bukti pembayaran ke admin.");
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
 }
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Pembelian Tiket</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:90%;
+max-width:420px;
+background:rgba(0,0,0,0.7);
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,60,0,0.5);
+backdrop-filter:blur(10px);
+}
+
+.title{
+text-align:center;
+font-size:28px;
+color:#ff3c00;
+margin-bottom:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+}
+
+label{
+font-size:13px;
+opacity:0.8;
+}
+
+.total{
+margin-top:10px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.qris{
+margin-top:15px;
+text-align:center;
+}
+
+.qris img{
+width:200px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,255,200,0.5);
+}
+
+.preview{
+margin-top:10px;
+text-align:center;
+}
+
+.preview img{
+max-width:100%;
+border-radius:10px;
+margin-top:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3c00,#ff8800);
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:10px;
+color:#00ffcc;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="title">FORM PEMBELIAN</div>
+
+<label>Nama Lengkap :</label>
+<input type="text" id="nama">
+
+<label>Nomor Identitas :</label>
+<input type="text" id="identitas" placeholder="NIK / SIM / PASPOR / KARTU PELAJAR">
+
+<label>EMAIL :</label>
+<input type="email" id="email">
+
+<label>NO. Whatsapp :</label>
+<input type="text" id="wa">
+
+<label>Alamat :</label>
+<input type="text" id="alamat">
+
+<!-- KATEGORI TIKET -->
+<label>Category Tiket :</label>
+<select id="kategori" onchange="hitungTotal()">
+<option value="0">-- Pilih Tiket --</option>
+<option value="0" disabled>Reguler Festival (Soldout)</option>
+<option value="450000">Reguler Premium - Rp 450.000</option>
+<option value="625000">Reguler Fast Track - Rp 625.000</option>
+</select>
+
+<label>Jumlah Tiket :</label>
+<input type="number" id="jumlah" value="1" min="1" onchange="hitungTotal()">
+
+<label>Total Harga Otomatis :</label>
+<div class="total" id="total">Rp 0</div>
+
+<div class="qris">
+<p>Scan QRIS Pembayaran</p>
+<img src="qris.png">
+</div>
+
+<label>Upload File Bukti Pembayaran :</label>
+<input type="file" id="upload" accept="image/*" onchange="previewImage()">
+
+<div class="preview" id="preview"></div>
+
+<button onclick="kirim()">BELI SEKARANG</button>
+
+<div class="loading" id="loading">⏳ Memproses...</div>
+
+</div>
+
+<script>
+
+/* HITUNG TOTAL */
+function hitungTotal(){
+let harga = document.getElementById("kategori").value;
+let jumlah = document.getElementById("jumlah").value;
+
+if(harga == 0){
+document.getElementById("total").innerText = "Pilih kategori tiket";
+return;
+}
+
+let total = harga * jumlah;
+document.getElementById("total").innerText = "Rp " + total.toLocaleString("id-ID");
+}
+
+/* PREVIEW */
+function previewImage(){
+let file = document.getElementById("upload").files[0];
+let preview = document.getElementById("preview");
+
+if(file){
+let reader = new FileReader();
+reader.onload = function(e){
+preview.innerHTML = "<img src='"+e.target.result+"'>";
+}
+reader.readAsDataURL(file);
+}
+}
+
+/* VALIDASI + REDIRECT */
+function kirim(){
+let nama = document.getElementById("nama").value;
+let wa = document.getElementById("wa").value;
+let kategori = document.getElementById("kategori").value;
+let upload = document.getElementById("upload").files.length;
+
+if(nama=="" || wa=="" || kategori==0 || upload==0){
+alert("Lengkapi semua data terlebih dahulu!");
+return;
+}
+
+document.getElementById("loading").style.display="block";
+
+setTimeout(()=>{
+window.location.href="https://poliponi.github.io/Konfirmasi-selanjutnya/";
+},2000);
+}
+
 </script>
 
 </body>
