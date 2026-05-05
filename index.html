@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembelian Tiket Event</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+    background:#0f0f0f;
+    color:white;
+}
+
+/* HEADER IMAGE */
+.banner img{
+    width:100%;
+}
+
+/* TITLE */
+.title{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    color:#ffd400;
+    margin:20px 0;
+}
+
+/* BOX */
+.box{
+    border:2px solid #ffd400;
+    border-radius:20px;
+    margin:20px;
+    padding:20px;
+}
+
+/* TICKET CARD */
+.ticket{
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.ticket h3{
+    font-size:22px;
+}
+
+.price{
+    color:#00ff99;
+    font-size:20px;
+    margin-top:5px;
+}
+
+/* INPUT */
+input,select{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+    border:none;
+    background:#2a2a2a;
+    color:white;
+}
+
+/* TOTAL */
+.total{
+    border:2px dashed #ffd400;
+    padding:20px;
+    margin-top:15px;
+    text-align:center;
+    border-radius:15px;
+}
+
+.total h2{
+    color:#00ff99;
+}
+
+/* QR */
+.qr-box{
+    border:3px solid #ffd400;
+    border-radius:20px;
+    padding:10px;
+    margin-top:15px;
+    text-align:center;
+}
+
+.qr-box img{
+    width:100%;
+    border-radius:15px;
+}
+
+/* BUTTON */
+.btn{
+    width:90%;
+    margin:30px auto;
+    display:block;
+    padding:15px;
+    background:#ffd400;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+    border:none;
+    border-radius:15px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+    <img src="https://via.placeholder.com/800x300?text=POSTER+EVENT" alt="">
+</div>
+
+<div class="title">PEMBELIAN TIKET EVENT</div>
+
+<!-- DAFTAR TIKET -->
+<div class="box">
+
+<h2>DAFTAR TIKET</h2>
+
+<div class="ticket">
+    <h3>PREMIUM</h3>
+    <div class="price">Rp. 450.000</div>
+</div>
+
+<div class="ticket">
+    <h3>FESTIVAL</h3>
+    <div class="price">Rp. 300.000</div>
+</div>
+
+<div class="ticket">
+    <h3>FAST TRACK</h3>
+    <div class="price">Rp. 625.000</div>
+</div>
+
+<p style="margin-top:10px;color:#ccc;">Maksimal pembelian tiket: <b>10 tiket</b></p>
+
+</div>
+
+<!-- FORM -->
+<div class="box">
+
+<label>Nama Lengkap</label>
+<input type="text" id="nama" placeholder="Masukan nama lengkap">
+
+<label>E-mail</label>
+<input type="email" id="email" placeholder="Masukan e-mail aktif">
+
+<label>Pilih Tiket</label>
+<select id="tiket" onchange="hitung()">
+<option value="">Pilih tiket</option>
+<option value="450000">PREMIUM - Rp. 450.000</option>
+<option value="300000">FESTIVAL - Rp. 300.000</option>
+<option value="625000">FAST TRACK - Rp. 625.000</option>
+</select>
+
+<label>Jumlah Tiket</label>
+<input type="number" id="jumlah" value="1" max="10" onchange="hitung()">
+
+<div class="total">
+    <p>TOTAL PEMBAYARAN</p>
+    <h2 id="total">Rp. 0</h2>
+</div>
+
+<h2 style="text-align:center;margin-top:20px;color:#ffd400;">SCAN QRIS PEMBAYARAN</h2>
+
+<div class="qr-box">
+    <!-- GANTI QRIS KAMU -->
+    <img src="https://via.placeholder.com/400x500?text=QRIS+ANDA">
+</div>
+
+<label>Upload Bukti Pembayaran</label>
+<input type="file">
+
+</div>
+
+<button class="btn" onclick="beli()">BELI SEKARANG</button>
+
+<script>
+function hitung(){
+    let harga = document.getElementById("tiket").value;
+    let jumlah = document.getElementById("jumlah").value;
+
+    let total = harga * jumlah;
+
+    document.getElementById("total").innerText =
+        "Rp. " + total.toLocaleString("id-ID");
+}
+
+function beli(){
+    let nama = document.getElementById("nama").value;
+    let email = document.getElementById("email").value;
+    let tiket = document.getElementById("tiket").value;
+
+    if(!nama || !email || !tiket){
+        alert("Lengkapi data dulu!");
+        return;
+    }
+
+    alert("Pesanan berhasil! Kirim bukti pembayaran ke admin.");
+}
+</script>
+
+</body>
+</html>
